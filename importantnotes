@@ -1,32 +1,3 @@
-To solve this error:
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/DefaultAsyncMailer.java:[84,77] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable Email
-[ERROR]   required: @Initialized @NonNull Email
-
-If I write-
-if(this.mailQueue.poll()!=null)
-	{
-	Email nextMail = this.mailQueue.poll();
-	Future<Void> sendingResult = this.asyncSend(nextMail);
-	deliveries.put(nextMail, sendingResult);
-	}
-
-It still returns the following error:
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/DefaultAsyncMailer.java:[85,53] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable Email
-[ERROR]   required: @Initialized @NonNull Email
-
-But if I write - 
-Email nextMail = this.mailQueue.poll();
-			if(nextMail!=null)
-			{
-				Future<Void> sendingResult = this.asyncSend(nextMail);
-				deliveries.put(nextMail, sendingResult);
-			}
-The error gets solved
-
------------------------------------------------------------------------------
-
 In DefaultTemplateMailer.java, 
 
 boolean shouldUseCustomConfiguration = configuration != null;
@@ -36,14 +7,3 @@ The above code already checks if configuration is null and act accordingly, but 
 On the other hand, if I replace it with the following:
 if(configuration!=null)
 The checker detects that code is not faulty.
-
----------------------------------------------------------------------------
-
-In MailerFactoryTest.java, all blocks of code similar to the following has already checked for nullness of env:
-if(env!=null)
-		{
-			when(env.getName()).thenReturn("production");
-			when(env.has(MailerFactory.MAILER_IMPLEMENTATION)).thenReturn(true);
-			when(env.get(MailerFactory.MAILER_IMPLEMENTATION)).thenReturn(MyMailer.class.getName());
-		}
-Hence there shouldn't be a possible null dereference for env which the checker suggests when we run mvn install.
