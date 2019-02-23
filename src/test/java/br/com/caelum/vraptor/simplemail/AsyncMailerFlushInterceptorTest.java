@@ -25,22 +25,25 @@ import br.com.caelum.vraptor.resource.DefaultResourceClass;
 import br.com.caelum.vraptor.resource.DefaultResourceMethod;
 import br.com.caelum.vraptor.resource.ResourceMethod;
 
-import org.checkerframework.checker.nullness.qual.*;
-
 @RunWith(MockitoJUnitRunner.class)
 public class AsyncMailerFlushInterceptorTest {
 	@Mock
-	@SuppressWarnings("initialization")
+	@SuppressWarnings("initialization") /* null cannot be assigned to this variable as there will be null dereference
+	when we call verifications.verify(mailer).deliverPostponedMails(); verify(mailer, never()).deliverPostponedMails();
+	verify(mailer).clearPostponedMails(); 
+	*/
 	private AsyncMailer mailer;
 	@Mock
-	@SuppressWarnings("initialization")
+	@SuppressWarnings("initialization")/* null cannot be assigned to this variable as there will be null dereference 
+	when we call verifications.verify(stack).next(method, controller);
+	doThrow(new InterceptionException("test")).when(stack).next(method, controller);
+	*/
 	private InterceptorStack stack;
-
-	@SuppressWarnings("initialization")
+	@SuppressWarnings("initialization") // this variable is initialized in setUp() function instead of constructor
 	private Interceptor interceptor;
-	@SuppressWarnings("initialization")
+	@SuppressWarnings("initialization") // this variable is initialized in setUp() function instead of constructor
 	private MyController controller;
-	@SuppressWarnings("initialization")
+	@SuppressWarnings("initialization") // this variable is initialized in setUp() function instead of constructor
 	private ResourceMethod method;
 
 	@Before

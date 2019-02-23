@@ -17,7 +17,7 @@ public class DefaultTemplateMailer implements TemplateMailer {
 
 	private final Freemarker freemarker;
 	private final Localization localization;
-	@Nullable private Configuration configuration;
+	private @Nullable Configuration configuration;
 	private final ServletContext context;
 	private final Environment env;
 
@@ -43,13 +43,13 @@ public class DefaultTemplateMailer implements TemplateMailer {
 	}
 
 	@Override
-	public TemplateMailer with(Configuration configuration) {
+	public TemplateMailer with(@Nullable Configuration configuration) {
 		DefaultTemplateMailer defaultTemplateMailer = new DefaultTemplateMailer(localization, freemarker, context, env);
 		defaultTemplateMailer.setConfiguration(configuration);
 		return defaultTemplateMailer;
 	}
 
-	private void setConfiguration(Configuration configuration) {
+	private void setConfiguration(@Nullable Configuration configuration) {
 		this.configuration = configuration;		
 	}
 	

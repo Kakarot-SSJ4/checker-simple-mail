@@ -159,6 +159,7 @@
         <arg>-Xbootclasspath/p:${annotatedJdk}</arg>
         <!-- -Awarns turns type-checking warnings into errors. -->
         <!-- <arg>-Awarns</arg> -->
+        <arg> -AskipUses=com\.amazonaws\.auth\.|br\.com\.caelum\.vraptor\.</arg>
       </compilerArgs>
     </configuration>
   </plugin>

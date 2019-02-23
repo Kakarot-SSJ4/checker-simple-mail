@@ -1,1 +1,0 @@
-# checker-simple-mail

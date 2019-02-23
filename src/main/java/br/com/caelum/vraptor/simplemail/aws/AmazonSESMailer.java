@@ -23,28 +23,21 @@ import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClient;
 import com.amazonaws.services.simpleemail.model.RawMessage;
 import com.amazonaws.services.simpleemail.model.SendRawEmailRequest;
 
-import org.checkerframework.checker.nullness.qual.*;
-
 public class AmazonSESMailer implements Mailer {
 	private final Environment env;
 	private final Session session;
-	private final @Nullable AmazonSimpleEmailServiceClient client;
+	private final AmazonSimpleEmailServiceClient client;
 
 	public AmazonSESMailer(Environment env) throws IOException {
 		this.env = env;
 		InputStream resource = AmazonSESMailer.class
 				.getResourceAsStream("/AwsCredentials.properties");
+		PropertiesCredentials credentials = new PropertiesCredentials(resource);
+		this.client = new AmazonSimpleEmailServiceClient(credentials);
 		Properties props = new Properties();
 		props.setProperty("mail.transport.protocol", "aws");
-		if(resource!=null)
-			{
-			PropertiesCredentials credentials = new PropertiesCredentials(resource);
-			this.client = new AmazonSimpleEmailServiceClient(credentials);
-			props.setProperty("mail.aws.user", credentials.getAWSAccessKeyId());
-			props.setProperty("mail.aws.password", credentials.getAWSSecretKey());
-			}
-		else
-			this.client = null;
+		props.setProperty("mail.aws.user", credentials.getAWSAccessKeyId());
+		props.setProperty("mail.aws.password", credentials.getAWSSecretKey());
 		this.session = Session.getInstance(props);
 	}
 
@@ -81,14 +74,12 @@ public class AmazonSESMailer implements Mailer {
 			 };
 
 			email.setMailSession(session);
-			if(this.client!=null)
-			{
-				try {
-					client.sendRawEmail(new SendRawEmailRequest()
-							.withRawMessage(mail2Content(email)));
-				} catch (Exception e) {
-					throw new EmailException(e);
-				}
+
+			try {
+				client.sendRawEmail(new SendRawEmailRequest()
+						.withRawMessage(mail2Content(email)));
+			} catch (Exception e) {
+				throw new EmailException(e);
 			}
 		} else {
 			new MockMailer().send(email);
