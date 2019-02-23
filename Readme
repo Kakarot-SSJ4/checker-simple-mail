@@ -1,0 +1,4 @@
+To compile, in the terminal run : "mvn compile"
+To build, in the terminal run : "mvn install"
+For every changes that were made, check log.
+Points of possible improvements(as observed by me) are given in importantnotes.
