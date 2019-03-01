@@ -20,15 +20,10 @@ import freemarker.template.TemplateException;
 public class DefaultTemplateMailTest {
 
 	@Mock
-	@SuppressWarnings("initialization") /* can't be null as there will be null dereference while calling 
-	when(localization.getMessage(templateName, null)).thenReturn("???"+templateName+"???");
-	when(localization.getMessage(templateName, null)).thenReturn("real template title");
-	*/
+	@SuppressWarnings("initialization") // part of the library br.com.caelum.vraptor.core.Localization
 	private Localization localization;
 	@Mock
-	@SuppressWarnings("initialization") /* can't be null as there will be null dereference while calling 
-	when(template.getContent()).thenReturn("Some message");
-	*/
+	@SuppressWarnings("initialization") // part of the library br.com.caelum.vraptor.freemarker.Template
 	private Template template;
 	@SuppressWarnings("initialization") // initialized in setUp()	
 	private String templateName;
@@ -53,7 +48,8 @@ public class DefaultTemplateMailTest {
 			templateMail.prepareEmail("leo", "leo@leo.com");
 			fail();		
 		} catch (RuntimeException e) {
-			assertTrue(e.getCause().getClass().isAssignableFrom(IllegalArgumentException.class));
+			assertTrue(e.getCause()==null?false:e.getCause().getClass().isAssignableFrom(IllegalArgumentException.class));
+			// if e.getCause is null, no further data can be fetched hence,isAssignableFrom(IllegalArgumentException.class) will be false
 		}
 	}
 	

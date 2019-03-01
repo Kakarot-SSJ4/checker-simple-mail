@@ -1,47 +1,18 @@
-First compile(mvn compile):
+mvn compile:
 [INFO] 4 errors 
 [INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  17.104 s
-[INFO] Finished at: 2019-02-14T20:50:51+05:30
+[INFO] Total time:  23.036 s
+[INFO] Finished at: 2019-02-28T00:42:42+05:30
 [INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile (default-compile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/DefaultAsyncMailer.java:[82,69] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable Email
-[ERROR]   required: @Initialized @NonNull Email
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/aws/AmazonSESMailer.java:[35,79] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable InputStream
-[ERROR]   required: @Initialized @NonNull InputStream
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[15,8] [initialization.fields.uninitialized] the constructor does not initialize fields: pool
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailer.java:[22,16] [initialization.fields.uninitialized] the constructor does not initialize fields: configuration
-
---------
-Assigned @Nullable annotation to pool in ExecutorServiceProvider.java and configuration in DefaultTemplateMailer.java
-After compiling:
-[INFO] 5 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  17.217 s
-[INFO] Finished at: 2019-02-14T21:01:16+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile (default-compile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/DefaultAsyncMailer.java:[82,69] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable Email
-[ERROR]   required: @Initialized @NonNull Email
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/aws/AmazonSESMailer.java:[35,79] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable InputStream
-[ERROR]   required: @Initialized @NonNull InputStream
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[28,28] [return.type.incompatible] incompatible types in return.
-[ERROR]   type of expression: @Initialized @Nullable ExecutorService
-[ERROR]   method return type: @Initialized @NonNull ExecutorService
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[33,21] [dereference.of.nullable] dereference of possibly-null reference this.pool
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailer.java:[37,105] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable Configuration
-[ERROR]   required: @Initialized @NonNull Configuration
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile (default-compile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
+[ERROR] /home/kakarot/tolog/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailer.java:[22,8] error: [initialization.fields.uninitialized] the constructor does not initialize fields: configuration
+[ERROR] /home/kakarot/tolog/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[15,7] error: [initialization.fields.uninitialized] the constructor does not initialize fields: pool
+[ERROR] /home/kakarot/tolog/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/MailerFactory.java:[47,9] error: [return.type.incompatible] incompatible types in return.
+[ERROR]  @Initialized @NonNull Mailer
+[ERROR] /home/kakarot/tolog/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/MailerFactory.java:[53,9] error: [return.type.incompatible] incompatible types in return.
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
@@ -50,87 +21,25 @@ After compiling:
 [ERROR] For more information about the errors and possible solutions, please read the following articles:
 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
 
------
+-------------------
+Assigning Nullable to configuration and changing boolean shouldUseCustomConfiguration = configuration != null;
+			if(shouldUseCustomConfiguration)
+to if(configuration!=null)
 
-Adding if(nextMail!=null) to prevent null argument
-After compiling:
-[INFO] 4 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  16.317 s
-[INFO] Finished at: 2019-02-14T21:57:08+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile (default-compile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/aws/AmazonSESMailer.java:[35,79] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable InputStream
-[ERROR]   required: @Initialized @NonNull InputStream
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[28,28] [return.type.incompatible] incompatible types in return.
-[ERROR]   type of expression: @Initialized @Nullable ExecutorService
-[ERROR]   method return type: @Initialized @NonNull ExecutorService
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[33,21] [dereference.of.nullable] dereference of possibly-null reference this.pool
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailer.java:[37,105] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable Configuration
-[ERROR]   required: @Initialized @NonNull Configuration
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
-------
-
-Handling if resources is null in AmazonSESMailer.java 
-After compiling:
-[INFO] 4 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  15.784 s
-[INFO] Finished at: 2019-02-15T03:51:24+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile (default-compile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/aws/AmazonSESMailer.java:[86,33] [dereference.of.nullable] dereference of possibly-null reference client
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[28,28] [return.type.incompatible] incompatible types in return.
-[ERROR]   type of expression: @Initialized @Nullable ExecutorService
-[ERROR]   method return type: @Initialized @NonNull ExecutorService
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[33,21] [dereference.of.nullable] dereference of possibly-null reference this.pool
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailer.java:[37,105] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable Configuration
-[ERROR]   required: @Initialized @NonNull Configuration
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
-----------
-
-Handling if client is null in AmazonSESMailer.java
-After compiling:
-
+mvn compile :
 [INFO] 3 errors 
 [INFO] -------------------------------------------------------------
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD FAILURE
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  19.140 s
-[INFO] Finished at: 2019-02-15T04:00:01+05:30
+[INFO] Total time:  24.548 s
+[INFO] Finished at: 2019-02-28T00:47:08+05:30
 [INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile (default-compile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[28,28] [return.type.incompatible] incompatible types in return.
-[ERROR]   type of expression: @Initialized @Nullable ExecutorService
-[ERROR]   method return type: @Initialized @NonNull ExecutorService
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[33,21] [dereference.of.nullable] dereference of possibly-null reference this.pool
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailer.java:[37,105] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable Configuration
-[ERROR]   required: @Initialized @NonNull Configuration
+[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:2.3.2:compile (default-compile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
+[ERROR] /home/kakarot/tolog/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/ExecutorServiceProvider.java:[15,7] error: [initialization.fields.uninitialized] the constructor does not initialize fields: pool
+[ERROR] /home/kakarot/tolog/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/MailerFactory.java:[47,9] error: [return.type.incompatible] incompatible types in return.
+[ERROR]  @Initialized @NonNull Mailer
+[ERROR] /home/kakarot/tolog/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/MailerFactory.java:[53,9] error: [return.type.incompatible] incompatible types in return.
 [ERROR] -> [Help 1]
 [ERROR] 
 [ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
@@ -139,322 +48,5 @@ After compiling:
 [ERROR] For more information about the errors and possible solutions, please read the following articles:
 [ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
 
------
+-----------------
 
-Suppressed the warning about pool not being initialized in the constructor as there is a function to initialize the variable.
-After compiling:
-[INFO] 1 error
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  15.367 s
-[INFO] Finished at: 2019-02-15T04:07:39+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:compile (default-compile) on project vraptor-simplemail: Compilation failure
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/main/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailer.java:[37,105] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : @Initialized @Nullable Configuration
-[ERROR]   required: @Initialized @NonNull Configuration
-[ERROR] 
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
-----------
-
-Replacing boolean shouldUseCustomConfiguration = configuration != null;	with if(configuration!=null)
-			if(shouldUseCustomConfiguration)
-After compiling, build is successful.
-
----------
-
-mvn install:
-
-[INFO] 15 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  21.593 s
-[INFO] Finished at: 2019-02-15T04:18:03+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:testCompile (default-testCompile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/MailerFactoryTest.java:[20,8] [initialization.fields.uninitialized] the constructor does not initialize fields: env, factory
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/DefaultAsyncMailerTest.java:[34,8] [initialization.fields.uninitialized] the constructor does not initialize fields: mockExecutor, mockMailer, mailer, env
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[20,8] [initialization.fields.uninitialized] the constructor does not initialize fields: localization, template, templateName, templateMail
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,32] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,94] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull String
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,100] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[38,45] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[38,60] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[44,46] [dereference.of.nullable] dereference of possibly-null reference e.getCause()
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[50,45] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[50,60] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,52] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,114] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull String
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,120] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/AsyncMailerFlushInterceptorTest.java:[29,8] [initialization.fields.uninitialized] the constructor does not initialize fields: mailer, stack, interceptor, controller, method
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
------
-Annotating factory and env as Nullable in MailerFactoryTest.java, and handling the situation if env is null.
-mvn install:
-[INFO] 21 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  13.519 s
-[INFO] Finished at: 2019-02-15T15:32:11+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:testCompile (default-testCompile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/MailerFactoryTest.java:[47,30] [dereference.of.nullable] dereference of possibly-null reference env
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/MailerFactoryTest.java:[48,30] [dereference.of.nullable] dereference of possibly-null reference env
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/MailerFactoryTest.java:[58,30] [dereference.of.nullable] dereference of possibly-null reference env
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/MailerFactoryTest.java:[59,30] [dereference.of.nullable] dereference of possibly-null reference env
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/MailerFactoryTest.java:[69,30] [dereference.of.nullable] dereference of possibly-null reference env
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/MailerFactoryTest.java:[79,30] [dereference.of.nullable] dereference of possibly-null reference env
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/MailerFactoryTest.java:[80,30] [dereference.of.nullable] dereference of possibly-null reference env
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/DefaultAsyncMailerTest.java:[34,8] [initialization.fields.uninitialized] the constructor does not initialize fields: mockExecutor, mockMailer, mailer, env
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[20,8] [initialization.fields.uninitialized] the constructor does not initialize fields: localization, template, templateName, templateMail
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,32] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,94] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull String
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,100] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[38,45] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[38,60] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[44,46] [dereference.of.nullable] dereference of possibly-null reference e.getCause()
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[50,45] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[50,60] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,52] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,114] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull String
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,120] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/AsyncMailerFlushInterceptorTest.java:[29,8] [initialization.fields.uninitialized] the constructor does not initialize fields: mailer, stack, interceptor, controller, method
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
-
-----------
-
-Suppressing null dereferences in MailerFactoryTest.java even though nullness has been checked before executing the code.
-mvn install:
-
-[INFO] 14 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  12.791 s
-[INFO] Finished at: 2019-02-15T15:43:45+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:testCompile (default-testCompile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/DefaultAsyncMailerTest.java:[34,8] [initialization.fields.uninitialized] the constructor does not initialize fields: mockExecutor, mockMailer, mailer, env
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[20,8] [initialization.fields.uninitialized] the constructor does not initialize fields: localization, template, templateName, templateMail
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,32] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,94] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull String
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,100] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[38,45] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[38,60] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[44,46] [dereference.of.nullable] dereference of possibly-null reference e.getCause()
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[50,45] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[50,60] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,52] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,114] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull String
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,120] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/AsyncMailerFlushInterceptorTest.java:[29,8] [initialization.fields.uninitialized] the constructor does not initialize fields: mailer, stack, interceptor, controller, method
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
-------------------------
-
-Suppressing initialization warnings of mockExecutor, mockMailer and Mailer, and annotating env as null.
-Because if they were to be null, the following lines would never be executed:
-mailer = new DefaultAsyncMailer(mockExecutor, mockMailer);
-mailer.sendLater(mail);
-mailer.sendLater(anotherMail);
-mailer.deliverPostponedMails();
-
-mvn install:
-[INFO] 13 errors 
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  13.880 s
-[INFO] Finished at: 2019-02-15T16:01:54+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:testCompile (default-testCompile) on project vraptor-simplemail: Compilation failure: Compilation failure: 
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[20,8] [initialization.fields.uninitialized] the constructor does not initialize fields: localization, template, templateName, templateMail
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,32] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,94] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull String
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[33,100] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[38,45] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[38,60] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[44,46] [dereference.of.nullable] dereference of possibly-null reference e.getCause()
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[50,45] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[50,60] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,52] [varargs.type.incompatible] incompatible types in varargs.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object @Initialized @NonNull []
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,114] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull String
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/template/DefaultTemplateMailTest.java:[52,120] [argument.type.incompatible] incompatible types in argument.
-[ERROR]   found   : null
-[ERROR]   required: @Initialized @NonNull Object
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/AsyncMailerFlushInterceptorTest.java:[29,8] [initialization.fields.uninitialized] the constructor does not initialize fields: mailer, stack, interceptor, controller, method
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
----------------------------------
-
-Suppressing errors in DefaultTemplateMailTest because otherwise the following lines of code will not run:
-when(template.getContent()).thenReturn("Some message");
-templateMail = new DefaultTemplateMail(templateName, template, localization, null, null);
-when(localization.getMessage(templateName, null)).thenReturn("???"+templateName+"???");
-templateMail.prepareEmail("leo", "leo@leo.com");
-when(localization.getMessage(templateName, null)).thenReturn("real template title");
-DefaultTemplateMail templateMail = new DefaultTemplateMail(templateName, template, localization, null, null);
-templateMail.prepareEmail("leo", "leo@leo.com");
-
-mvn install:
-[INFO] 1 error
-[INFO] -------------------------------------------------------------
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD FAILURE
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  20.475 s
-[INFO] Finished at: 2019-02-15T23:55:21+05:30
-[INFO] ------------------------------------------------------------------------
-[ERROR] Failed to execute goal org.apache.maven.plugins:maven-compiler-plugin:3.6.1:testCompile (default-testCompile) on project vraptor-simplemail: Compilation failure
-[ERROR] /home/kakarot/try/vraptor-simplemail/src/test/java/br/com/caelum/vraptor/simplemail/AsyncMailerFlushInterceptorTest.java:[29,8] [initialization.fields.uninitialized] the constructor does not initialize fields: mailer, stack, interceptor, controller, method
-[ERROR] 
-[ERROR] -> [Help 1]
-[ERROR] 
-[ERROR] To see the full stack trace of the errors, re-run Maven with the -e switch.
-[ERROR] Re-run Maven using the -X switch to enable full debug logging.
-[ERROR] 
-[ERROR] For more information about the errors and possible solutions, please read the following articles:
-[ERROR] [Help 1] http://cwiki.apache.org/confluence/display/MAVEN/MojoFailureException
-
-
----------------------------------
-
-Suppressing errors in AsyncMailerFlushInterceptorTest.java because interceptor, controller, method is initialized in a method, and suppressing errors related to mailer and stack to enable the following lines of code:
-
-interceptor = new AsyncMailerFlushInterceptor(mailer);
-when(mailer.hasMailToDeliver()).thenReturn(false);
-interceptor.intercept(stack, method, controller);
-InOrder verifications = inOrder(stack, mailer);
-verifications.verify(stack).next(method, controller);
-		verifications.verify(mailer).deliverPostponedMails();
-doThrow(new InterceptionException("test")).when(stack).next(method, controller);
-when(mailer.hasMailToDeliver()).thenReturn(true);
-interceptor.intercept(stack, method, controller);
-verify(mailer, never()).deliverPostponedMails();
-		verify(mailer).clearPostponedMails();
-
-mvn install:
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time:  37.514 s
-[INFO] Finished at: 2019-02-16T00:11:01+05:30
-[INFO] ------------------------------------------------------------------------

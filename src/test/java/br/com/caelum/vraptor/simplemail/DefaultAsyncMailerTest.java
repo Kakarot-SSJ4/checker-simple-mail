@@ -35,14 +35,10 @@ import org.checkerframework.checker.nullness.qual.*;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class DefaultAsyncMailerTest {
 	@Mock
-	@SuppressWarnings("initialization") /* can't be null as there will be null dereference while calling 
-	when(mockExecutor.submit(any(Callable.class))).thenAnswer(sendMail); */
+	@SuppressWarnings("initialization") // part of the library java.util.concurrent.ExecutorService;
 	private ExecutorService mockExecutor; 
 	@Mock
-	@SuppressWarnings("initialization") /* can't be null as there will be null dereferences while calling
-	verify(mockMailer, times(1)).send(email); verify(mockMailer, times(1)).send(anotherMail); 
-	verify(mockMailer, never()).send(any(Email.class));
-	*/
+	@SuppressWarnings("initialization") //  instance of the interface Mailer to access its methods 
 	private Mailer mockMailer;
 	@SuppressWarnings("initialization") // this variable is initialized in setUp()
 	private AsyncMailer mailer;

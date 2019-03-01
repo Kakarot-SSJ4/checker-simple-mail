@@ -28,16 +28,10 @@ import br.com.caelum.vraptor.resource.ResourceMethod;
 @RunWith(MockitoJUnitRunner.class)
 public class AsyncMailerFlushInterceptorTest {
 	@Mock
-	@SuppressWarnings("initialization") /* null cannot be assigned to this variable as there will be null dereference
-	when we call verifications.verify(mailer).deliverPostponedMails(); verify(mailer, never()).deliverPostponedMails();
-	verify(mailer).clearPostponedMails(); 
-	*/
+	@SuppressWarnings("initialization") // instance of the interface AsyncMailer to access its methods
 	private AsyncMailer mailer;
 	@Mock
-	@SuppressWarnings("initialization")/* null cannot be assigned to this variable as there will be null dereference 
-	when we call verifications.verify(stack).next(method, controller);
-	doThrow(new InterceptionException("test")).when(stack).next(method, controller);
-	*/
+	@SuppressWarnings("initialization") // part of an unkown library br.com.caelum.vraptor.core.InterceptorStack so can't say
 	private InterceptorStack stack;
 	@SuppressWarnings("initialization") // this variable is initialized in setUp() function instead of constructor
 	private Interceptor interceptor;

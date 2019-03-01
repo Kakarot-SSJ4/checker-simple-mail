@@ -74,13 +74,11 @@ public class DefaultAsyncMailer implements AsyncMailer {
 	}
 
 	@Override
-	@SuppressWarnings("null") /* nextMail parameter in asyncsend can't be null as it is involved in the functions getSubject()
-    getToAddresses() which are a part of org.apache.commons.mail.Email	*/ 
 	public Map<Email, Future<Void>> deliverPostponedMails() {
 		Map<Email, Future<Void>> deliveries = new HashMap<Email, Future<Void>>();
 		LOGGER.debug("Delivering all {} postponed emails", this.mailQueue.size());
 		while (!this.mailQueue.isEmpty()) {
-			Email nextMail = this.mailQueue.poll();
+			@SuppressWarnings("null") Email nextMail = this.mailQueue.poll();  // !mailQueue.isEmpty() => poll() != null
 			Future<Void> sendingResult = this.asyncSend(nextMail);
 			deliveries.put(nextMail, sendingResult);
 		}

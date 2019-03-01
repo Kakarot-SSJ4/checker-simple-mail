@@ -19,14 +19,7 @@ import br.com.caelum.vraptor.simplemail.aws.MockMailer;
 @RunWith(MockitoJUnitRunner.class)
 public class MailerFactoryTest {
 	@Mock
-	@SuppressWarnings("initialization") /* can't be null as there will be null dereference while calling the following:
-	when(env.getName()).thenReturn("development");
-	when(env.getName()).thenReturn("production");
-	when(env.has(MailerFactory.MAILER_IMPLEMENTATION)).thenReturn(true);
-	when(env.get(MailerFactory.MAILER_IMPLEMENTATION)).thenReturn(MyMailer.class.getName());
-	when(env.getName()).thenReturn("development");
-	when(env.getName()).thenReturn("production");
-	*/
+	@SuppressWarnings("initialization") // part of the library br.com.caelum.vraptor.environment.Environment
 	private Environment env;
 	@SuppressWarnings("initialization") // initialized in setUp()
 	private MailerFactory factory;
