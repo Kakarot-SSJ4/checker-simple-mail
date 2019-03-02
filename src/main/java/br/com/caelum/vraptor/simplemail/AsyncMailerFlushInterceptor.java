@@ -11,6 +11,8 @@ import br.com.caelum.vraptor.interceptor.Interceptor;
 import br.com.caelum.vraptor.ioc.RequestScoped;
 import br.com.caelum.vraptor.resource.ResourceMethod;
 
+import org.checkerframework.checker.nullness.qual.*;
+
 @Intercepts(before = ExecuteMethodInterceptor.class)
 @RequestScoped
 public class AsyncMailerFlushInterceptor implements Interceptor {

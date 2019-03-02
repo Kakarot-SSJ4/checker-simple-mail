@@ -28,10 +28,10 @@ import br.com.caelum.vraptor.resource.ResourceMethod;
 @RunWith(MockitoJUnitRunner.class)
 public class AsyncMailerFlushInterceptorTest {
 	@Mock
-	@SuppressWarnings("initialization") // instance of the interface AsyncMailer to access its methods
+	@SuppressWarnings("initialization") // this class is a test class of AsyncMailerFlushInterceptor, this will be customized when needed to check validity of the code
 	private AsyncMailer mailer;
 	@Mock
-	@SuppressWarnings("initialization") // part of an unkown library br.com.caelum.vraptor.core.InterceptorStack so can't say
+	@SuppressWarnings("initialization") // this class is a test class of AsyncMailerFlushInterceptor, this will be customized when needed to check validity of the code
 	private InterceptorStack stack;
 	@SuppressWarnings("initialization") // this variable is initialized in setUp() function instead of constructor
 	private Interceptor interceptor;
