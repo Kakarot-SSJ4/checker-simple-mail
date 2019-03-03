@@ -35,10 +35,10 @@ import org.checkerframework.checker.nullness.qual.*;
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class DefaultAsyncMailerTest {
 	@Mock
-	@SuppressWarnings("initialization") // part of the library java.util.concurrent.ExecutorService;
+	@SuppressWarnings("initialization") // this class is a test class of DefaultAsyncMailer, this will be customized when needed to check validity of the code 
 	private ExecutorService mockExecutor; 
 	@Mock
-	@SuppressWarnings("initialization") //  instance of the interface Mailer to access its methods 
+	@SuppressWarnings("initialization") // this class is a test class of DefaultAsyncMailer, this will be customized when needed to check validity of the code 
 	private Mailer mockMailer;
 	@SuppressWarnings("initialization") // this variable is initialized in setUp()
 	private AsyncMailer mailer;
